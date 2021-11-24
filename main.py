@@ -1,5 +1,3 @@
-import socket
-
 from scapy.all import ARP,srp,Ether
 import scapy.all as scapy
 
