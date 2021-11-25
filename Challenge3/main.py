@@ -1,5 +1,4 @@
-from scapy.all import ARP,srp,Ether
-import scapy.all as scapy
+from scapy.all import ARP,srp,Ether,get_if_addr,get_working_if
 
 ###MÉTHODE : Idéntification de la MAC de l'IP envoyé###
 def mac(ip):
@@ -10,10 +9,10 @@ def mac(ip):
         return False
 
 ###PROGRAMME###
-ip = scapy.get_if_addr(scapy.conf.iface)    #On obtient notre IP
+ip = get_if_addr(scapy.conf.iface)    #On obtient notre IP
 print(ip)
 
-print(scapy.get_working_if().description)   #On cherche le type d'interface de réseau
+print(get_working_if().description)   #On cherche le type d'interface de réseau
 
 ip = ip.split(".")  #Pour chercher les autres machines de notre réseau, on va efacer le dernier numéro de notre IP
 ip = f"{ip[0]}.{ip[1]}.{ip[2]}."
