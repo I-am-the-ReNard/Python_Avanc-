@@ -22,9 +22,7 @@ def breakPass (motPass) :
 
         return ""   #Si on n'a pas trouvé le mot de passe, on e
 
-
 ###PROGRAME###
-
 print("Veuilliez écriver un mot de pas faible : ")  #Définition du mdp
 motPass = input()
 
@@ -40,7 +38,7 @@ else :    #Par défaut
 
 mp = breakPass(motPass) #On appelle la fonction qui essayera d'obtenir le mdp
 
-if mp == "" :   #Résultats
+if not mp :   #Résultats
     print("Le mot de pas n'est pas trouvé")
 else :
     print("Le mot de pass est : "+mp)
