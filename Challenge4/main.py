@@ -1,24 +1,17 @@
 import socket
 
-
-def main(obj,i):
+###MÉTHODE : Détecte si un port est ouvert###
+def portsDetecter (ip,i) :
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    try :
-        s.settimeout(0.3)
-        s.connect((obj, i)) #connect_ex
-        return True
-    except :
-        return False
-     #   return False
-    #request = b'CONNECT google.com HTTP/1.1\n\n'
-    #s.send(request)
-    #print(s.recv(4096).decode())
+    s.settimeout(0.3) #Limite de temps pour établir une connexion
+    return s.connect_ex((ip,i)) #On essaie de se connecter au port : si le port est ouvert, la fonction retournera 0
 
-print("Veuilliez vous entrer le nom ou l'IP d'un serveur ?")
-objectif = input()
+###PROGRAMME###
+print("Veuilliez vous entrer le nom ou l'IP d'un serveur ?")    #Demande de l'IP à scanner
+ip = input()
 
-print("DEMARRAGE DU SCAN")
-for i in range (79,11000) :
-    if main(objectif, i) :
-        print(str(i) +" : Ouvert")
+print("\nDEMARRAGE DU SCAN...")
+for i in range (1,11000) :  #Boucle pour analyser les ports entre 0 et 11000
+    if not portsDetecter(ip,i) :    #Appelle à la fonction qui essaiera se connecter au port i de l'IP ip
+        print(str(i) +" : Ouvert")  #Si elle a réussi a se connecter, on affichera le port
 print("FIN DU SCAN")
