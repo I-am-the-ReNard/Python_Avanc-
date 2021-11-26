@@ -3,24 +3,11 @@ import hashlib
 ###MÉTHODE : Cherche le mdp###
 def breakPass (motPass) :
     with open(r"mots.txt","r") as fp :    #On ouvre le document avec les possibles mdp
-        #md5
-        for line in fp :
-            if motPass == hashlib.md5(line[:-1].encode("UTF-8")).hexdigest() :  #Le mdp == le mot de la ligne "i", encrypté en md5 ?
-                return line[:-1]    #Si le mdp est trouvé, on le retourne et on finit la boucle
-
-        #sha256
-        fp.seek(0)  #On retourne au début du document txt
-        for line in fp :
-            if motPass == hashlib.sha256(line[:-1].encode("UTF-8")).hexdigest() :
-                return line[:-1]
-
-        #sha512
-        fp.seek(0)
-        for line in fp :
-            if motPass == hashlib.sha512(line[:-1].encode("UTF-8")).hexdigest() :
-                return line[:-1]
-
-        return ""   #Si on n'a pas trouvé le mot de passe, on e
+        encr = [hashlib.md5,hashlib.sha256(),hashlib.sha512()]
+        for en in encr :
+            for line in fp :
+                    if motPass == en(line[:-1].encode("UTF-8")).hexdigest() :  #Le mdp == le mot de la ligne "i", encrypté en md5 ?
+                        return line[:-1]    #Si le mdp est trouvé, on le retourne et on finit la boucle
 
 ###PROGRAME###
 print("Veuilliez écriver un mot de pas faible : ")  #Définition du mdp
